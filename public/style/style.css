@@ -1,0 +1,6 @@
+.img-thumbnail {
+    max-width: 300px !important;
+}
+.block-info-personal{
+    gap: 8vh;
+}
