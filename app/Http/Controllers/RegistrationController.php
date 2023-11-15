@@ -1,7 +1,7 @@
 <?php
-namespace App\Http\Models\User;
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
@@ -15,7 +15,7 @@ class RegistrationController extends Controller
             "email"=>"required|unique:users|email",
             "name"=>"required",
             "password"=>"required",
-            "confirm_pass"=>"required|same:pass",
+            "confirm_pass"=>"required|same:password",
         ],[
             "email.required"=>"Поле обязательно для заполнения!",
             "name.required"=>"Поле обязательно для заполнения!",
@@ -26,11 +26,13 @@ class RegistrationController extends Controller
         ]);
         $userInfo=$request->all();
 
-        User::create([
+        $user_create=User::create([
             "email"=>$userInfo["email"],
             "name"=>$userInfo["name"],
-            "password"=>$userInfo["password"],
+            "password"=>Hash::make($userInfo["password"]),
         ]);
-        return redirect("/registration")->with("success","");
+        if ($user_create)
+        return redirect("authorization")->with("success","");
+    return redirect()->back()->with("error","Произошла ошибка! Попробуйте снова!");
     }
 }

@@ -1,7 +1,7 @@
 <?php
-namespace App\Http\Models\User;
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class AuthorizationController extends Controller
@@ -20,7 +20,19 @@ class AuthorizationController extends Controller
             "password.required"=>"Поле обязательно для заполнения!",
         ]);
 
-        $user = $request->only("email","pass");
-        bb($user);
+        $user = $request->only("email","password");
+        if (Auth::attempt([
+           "email" => $user["email"],
+           "password" => $user["password"]
+       ]))
+       {    
+        return redirect("/")->with("success","");
+       }
+       return redirect()->back()->with("error","Неверный логин или пароль");
+    }
+        public function signout() {
+        Session::flush();
+        Auth::logout();
+        return redirect("/");
     }
 }

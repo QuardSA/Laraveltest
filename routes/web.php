@@ -39,3 +39,4 @@ Route::get("/application/{id_application}/confirm",[ApplicationController::class
 Route::post("/course/create",[CourseController::class,"create"]);
 
 Route::post("/category/create",[CategoryController::class,"create"]);
+Route::get("/signout",[AuthorizationController::class, 'signout'] );

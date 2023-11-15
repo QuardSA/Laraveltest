@@ -13,13 +13,19 @@
               <li class="nav-item">
                 <a class="nav-link" href="/">Курсы</a>
               </li>
+              @auth
               <li class="nav-item">
                 <a class="nav-link" href="/">Записаться</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/personal">Личный кабинет</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/signout">Выход</a>
+              </li>
+              @endauth
             </ul>
+            @guest
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" href="/registration">Регистрация</a>
@@ -28,6 +34,7 @@
                 <a class="nav-link" href="/authorization">Войти</a>
               </li>
             </ul>
+            @endguest
           </div>
         </div>
       </nav>
