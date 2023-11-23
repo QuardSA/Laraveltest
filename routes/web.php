@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\RegistrationController;
@@ -20,23 +21,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[CourseController::class,"index"]);
+Route::get('/', [CourseController::class, "index"]);
 
 Route::get('/personal', [PersonalController::class, "personal"]);
 
-Route::post("/enroll",[ApplicationController::class,"new_application"]);
+Route::post("/enroll", [ApplicationController::class, "new_application"]);
 
-Route::get("/admin",[AdminController::class,"index"]);
+Route::get("/admin", [AdminController::class, "index"]);
 
-Route::get("/registration",[RegistrationController::class,"registration"]);
-Route::post("/registration-valid",[RegistrationController::class,"signup_valid"]);
+Route::get("/registration", [RegistrationController::class, "registration"]);
+Route::post("/registration-valid", [RegistrationController::class, "signup_valid"]);
 
-Route::get("/authorization",[AuthorizationController::class,"authorization"]);
-Route::post("/authorization-valid",[AuthorizationController::class,"signin_valid"]);
+Route::get("/authorization", [AuthorizationController::class, "authorization"]);
+Route::post("/authorization-valid", [AuthorizationController::class, "signin_valid"]);
 
-Route::get("/application/{id_application}/confirm",[ApplicationController::class,"confirm"]);
+Route::get("/application/{id_application}/confirm", [ApplicationController::class, "confirm"]);
 
-Route::post("/course/create",[CourseController::class,"create"]);
+Route::post("/course/create", [CourseController::class, "create"]);
 
-Route::post("/category/create",[CategoryController::class,"create"]);
-Route::get("/signout",[AuthorizationController::class, 'signout'] );
+Route::get("/category/{id}", [CategoriesController::class, "show"]);
+
+Route::post("/category/create", [CategoryController::class, "create"]);
+Route::get("/signout", [AuthorizationController::class, 'signout']);
