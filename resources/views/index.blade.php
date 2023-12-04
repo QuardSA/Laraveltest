@@ -77,9 +77,10 @@
             </div>
         </section>
 
-        <div class="container"> <a href="/category/{{ 1 }}">PHP</a>
-            <a href="/category/{{ 2 }}">JS</a>
-            <a href="/category/{{ 3 }}">CSS</a>
+        <div class="container"> 
+            @foreach  ($categories as $category)
+                <a href="index/{{$category->id}}/category"> {{$category->title}}</a>
+            @endforeach
         </div>
 
         <section id="courses">
